@@ -24,8 +24,8 @@ for p in passage:
     if paragraphs[-1][-1] == '': # Enter character which was already stripped
         paragraphs[-1].pop()
 
-for pr in paragraphs:
-    print(pr)
+#for pr in paragraphs:
+#    print(pr)
 
 def lrmm(sentence):
     chwx = sentence.split(' ')
@@ -51,7 +51,16 @@ def lrmm(sentence):
         if word_found == False:
             words.append(chwx[i])
             i += 1
-    return words
+    return ' '.join(words)
 
-sentence = "Em bước sang ngang đợi chờ một điều diệu kì"
-print(lrmm(sentence))
+new_passage = []
+for i in range(len(paragraphs)):
+    temp_passage = []
+    for j in range(len(paragraphs[i])):
+        temp_passage.append(lrmm(paragraphs[i][j]) + '.')
+    new_passage.append(' '.join(temp_passage))
+
+with open("output.txt", mode='w+', encoding='utf-8') as fout:
+    for pr in new_passage:
+        fout.write(pr)
+        fout.write('\n')
