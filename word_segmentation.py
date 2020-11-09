@@ -1,13 +1,8 @@
-import io
-
-# Read input file
-#fin = io.open("input1.txt", mode='r', encoding='utf-8')
-#text = fin.readlines()
+#import io
 
 # Read Vdic dataset
-fin = io.open("VDic_uni.txt", mode='r', encoding='utf-8')
-vdic_uni = fin.readlines()
-#print(vdic_uni)
+with open("VDic_uni.txt", mode='r', encoding='utf-8') as fin:
+    vdic_uni = fin.readlines()
 
 # Create a list vdic
 vdic = []
@@ -15,11 +10,22 @@ for i in range(len(vdic_uni)):
     tab_index = vdic_uni[i].find('\t')
     vdic.append(vdic_uni[i][:tab_index])
 
+# Read input file
+with open("input.txt", mode='r', encoding='utf-8') as fin:
+    passage = fin.readlines()
+
 # Split paragraph into sentences
-#paragraphs = []
-#for p in text:
-#    paragraphs.append([])
-#    paragraphs[-1] = p.split('.')
+paragraphs = [] # contain sentences
+for p in passage:
+    paragraphs.append([])
+    paragraphs[-1] = p.split('.')
+    for i in range(len(paragraphs[-1])):
+        paragraphs[-1][i] = paragraphs[-1][i].strip() # Remove leading and trailing whitespaces
+    if paragraphs[-1][-1] == '': # Enter character which was already stripped
+        paragraphs[-1].pop()
+
+for pr in paragraphs:
+    print(pr)
 
 def lrmm(sentence):
     chwx = sentence.split(' ')
@@ -45,8 +51,7 @@ def lrmm(sentence):
         if word_found == False:
             words.append(chwx[i])
             i += 1
-    
     return words
 
-sentence = "Ngày chủ nhật bố mẹ vắng nhà"
+sentence = "Em bước sang ngang đợi chờ một điều diệu kì"
 print(lrmm(sentence))
