@@ -22,8 +22,7 @@ for i in range(len(vdic_uni)):
 #    paragraphs[-1] = p.split('.')
 
 def lrmm(sentence):
-    s = sentence.lower()
-    chwx = s.split(' ')
+    chwx = sentence.split(' ')
     words = []
     i = 0
     while i < len(chwx):
@@ -31,7 +30,8 @@ def lrmm(sentence):
         for c in [3, 2, 1]: # The number of chwx of a word
             if i + c - 1 < len(chwx):
                 if c > 1:
-                    if ' '.join(chwx[i:i+c]) in vdic:
+                    temp_word = ' '.join(chwx[i:i+c])
+                    if temp_word in vdic:
                         word_found = True
                         words.append('_'.join(chwx[i:i+c]))
                         i += c 
